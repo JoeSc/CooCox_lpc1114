@@ -16,6 +16,9 @@
 
 /*---------------------------- Inlcude --------------------------------------*/
 #include <coocox.h>
+#include "stdio.h"
+
+
 
 /**
  *******************************************************************************
@@ -52,6 +55,7 @@ void CoIdleTask(void* pdata)
 void CoStkOverflowHook(OS_TID taskID)
 {
     /* Process stack overflow  here */
+    printf("Stack Overflow in %d",taskID);
     for(; ;) 
     {
       
