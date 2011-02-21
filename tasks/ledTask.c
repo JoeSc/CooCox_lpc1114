@@ -12,13 +12,11 @@
 void ledTask(void *pvParameters)
 {
     TASKHANDLES *taskHandles = (TASKHANDLES*)pvParameters;
-//    vTaskDelay(10/portTICK_RATE_MS);
     SYSTICK_LED_IOCON = 0x0;
     SYSTICK_LED_DIR = (1<<SYSTICK_LED_PIN);
+  
     CoTickDelay(100);
 
-    //int *ptr = (int*)pvParameters;
-    //printf("I GOT ___ %d\n",*ptr);
    
     unsigned int i;
     unsigned int delay = 500;
