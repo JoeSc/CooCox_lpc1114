@@ -14,7 +14,7 @@ VPATH=lpc1xxx:libs:core
 VPATH+=$(addprefix :, $(INCLUDEDIRS))
 
 OBJFILES = main.o cpu_init.o uart.o core_cm0.o 
-OBJFILES += ledTask.o
+OBJFILES += ledTask.o radioTask.o rc_pwm.o
 SRCS = $(shell find CoOS | grep "\.c$$" | xargs basename)
 OBJFILES+= $(SRCS:.c=.o)
 
@@ -27,7 +27,7 @@ INIT_OBJS= ${OBJFOLDER}/LPC11xx_handlers.o ${OBJFOLDER}/LPC1xxx_startup.o
 #LPC21ISP PROGRAMMING
 ##########################################################################
 LPC21ISP = /usr/local/bin/lpc21isp
-LPC21ISP_PORT = /dev/tty.usbserial*
+LPC21ISP_PORT = /dev/tty.usbserial-A900fKM4
 LPC21ISP_BAUD = 115200 #38400
 LPC21ISP_XTAL = 12000
 LPC21ISP_FLASHFILE = $(OBJFOLDER)/$(OUTFILE).hex
