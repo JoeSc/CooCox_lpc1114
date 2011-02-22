@@ -30,6 +30,10 @@ typedef struct
 //        }flight_settings;
 
         struct {
+                OS_MutexID i2c;
+        }lock;
+            
+        struct {
                 uint8_t armed;
                 //unsigned char telem_mode;
                 //int tx_throttle, tx_yaw, tx_pitch, tx_roll;

@@ -4,6 +4,8 @@
 #include <stdio.c>
 #include <uart.h>
 #include <cpu_init.h>
+#include <i2c.h>
+
 #include "ledTask.h"
 #include "radioTask.h"
 
@@ -21,10 +23,11 @@ int main(void)
 {
     cpuInit();
     uartInit(BAUDRATE);
+    i2cInit();
 
     TASKHANDLES System;
     System.flight_control.armed=0;
-
+    System.lock.i2c = CoCreateMutex ( );
 
     CoInitOS();
 

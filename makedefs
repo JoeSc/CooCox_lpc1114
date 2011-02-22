@@ -76,6 +76,7 @@ ${OBJFOLDER}/%.elf:
 	@${LD} -T ${LD_FILE} 						  \
 			${LDFLAGS} -o ${@} ${^} -lm
 	@${SIZE} ${@}
+	@.bin/size ${@}
 	@echo "  OBJ    ${@:.elf=.hex}"
 	@${OBJCOPY} $(OCFLAGS) -O ihex ${@} ${@:.elf=.hex}
 
