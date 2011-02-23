@@ -35,6 +35,7 @@ typedef struct
             
         struct {
                 uint8_t armed;
+                uint8_t error;
                 //unsigned char telem_mode;
                 //int tx_throttle, tx_yaw, tx_pitch, tx_roll;
                 //unsigned int command_used_number;

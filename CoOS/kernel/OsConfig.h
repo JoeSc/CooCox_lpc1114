@@ -242,7 +242,7 @@ Enable(1) or disable(0) mutex management.
 */
 #if CFG_TASK_WAITTING_EN > 0
 #if CFG_TASK_SCHEDULE_EN > 0
-#define  CFG_MUTEX_EN           (0) 
+#define  CFG_MUTEX_EN           (1) 
 #endif
 #endif
 

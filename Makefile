@@ -14,7 +14,8 @@ VPATH=lpc1xxx:libs:core
 VPATH+=$(addprefix :, $(INCLUDEDIRS))
 
 OBJFILES = main.o cpu_init.o uart.o core_cm0.o 
-OBJFILES += ledTask.o radioTask.o rc_pwm.o
+OBJFILES += ledTask.o radioTask.o flightTask.o 
+OBJFILES += rc_pwm.o i2c.o bma180.o itg3200.o hmc5843.o
 SRCS = $(shell find CoOS | grep "\.c$$" | xargs basename)
 OBJFILES+= $(SRCS:.c=.o)
 
