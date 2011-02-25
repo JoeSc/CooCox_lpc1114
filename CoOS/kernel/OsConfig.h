@@ -47,7 +47,7 @@ System frequency (Hz).
 /*!< 
 systick frequency (Hz).	                         
 */
-#define CFG_SYSTICK_FREQ        (100) 		
+#define CFG_SYSTICK_FREQ        (500) 		
 
 /*!< 
 max systerm api call num in ISR.	                         
@@ -272,6 +272,6 @@ Enable(1) or disable(0) TimeToTick() utility
 #define	CFG_TIME_TO_TICK_EN     (1)		
 #endif
 
-#define OS_MS(x)                ( x * CFG_SYSTICK_FREQ / 1000 )
+#define OS_MS(x)                ( (x * CFG_SYSTICK_FREQ )/ 1000 )
 
 #endif	 // _CONFIG_H
