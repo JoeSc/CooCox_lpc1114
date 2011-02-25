@@ -21,8 +21,8 @@ void flightTask( void *param)
     GPIO_GPIO2DATA &= ~(1<<6);
 
     if ( init_bma180(0x02, 0x02) |
-            init_itg3200()) /*|
-                              init_hmc5843() )*/
+            init_itg3200() |
+            init_hmc5843() )
     {
         taskHandles->flight_control.error = 1;
         puts("I2C ERROR");
@@ -43,17 +43,22 @@ void flightTask( void *param)
 
         update_bma180();
         update_itg3200();
+        update_hmc5843();
+        calculate_heading_hmc5843( -roll, pitch);
+        
         G_Dt = 2621;
-        Matrix_update( itg3200_gyro_x, itg3200_gyro_y, itg3200_gyro_z, 
+        Matrix_update( itg3200_gyro_x, itg3200_gyro_y, itg3200_gyro_z-90, 
                 bma180_acc_x, bma180_acc_y, bma180_acc_z);
         Normalize();
-        Drift_correction();
+//        Drift_correction(fix16_cos(-hmc5843_heading),fix16_sin(-hmc5843_heading));
+        Drift_correction(fix16_sin(-hmc5843_heading), -fix16_cos(-hmc5843_heading));
         Euler_angles();
         GPIO_GPIO2DATA &= ~(1<<6);
 
-//        printf("%d,%d,%d,",bma180_acc_x,bma180_acc_y,bma180_acc_z);
-//        printf("%d,%d,%d\n",itg3200_gyro_x,itg3200_gyro_y,itg3200_gyro_z);
+        //        printf("%d,%d,%d,",bma180_acc_x,bma180_acc_y,bma180_acc_z);
+        //        printf("%d,%d,%d\n",itg3200_gyro_x,itg3200_gyro_y,itg3200_gyro_z);
         printf("%d, %d, %d\n",roll,pitch,yaw);
+//        printf("%8d\%8d\t%8d\n",hmc5843_mag_x,hmc5843_mag_y,fix16_to_int(fix16_mul(fix16_from_dbl(57.2957795131),hmc5843_heading)));
 
     }
 }
