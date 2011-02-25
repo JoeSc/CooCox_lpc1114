@@ -47,7 +47,7 @@ System frequency (Hz).
 /*!< 
 systick frequency (Hz).	                         
 */
-#define CFG_SYSTICK_FREQ        (500) 		
+#define CFG_SYSTICK_FREQ        (1000) 		
 
 /*!< 
 max systerm api call num in ISR.	                         

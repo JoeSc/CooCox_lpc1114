@@ -16,6 +16,7 @@ VPATH+=$(addprefix :, $(INCLUDEDIRS))
 OBJFILES = main.o cpu_init.o uart.o core_cm0.o 
 OBJFILES += ledTask.o radioTask.o flightTask.o 
 OBJFILES += rc_pwm.o i2c.o bma180.o itg3200.o hmc5843.o
+OBJFILES += fixed_DCM.o fix16.o fix16_sqrt.o fix16_trig.o
 SRCS = $(shell find CoOS | grep "\.c$$" | xargs basename)
 OBJFILES+= $(SRCS:.c=.o)
 
