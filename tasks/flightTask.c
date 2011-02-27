@@ -53,7 +53,7 @@ void flightTask( void *param)
                 bma180_acc_x, bma180_acc_y, bma180_acc_z);
         Normalize();
 //        Drift_correction(fix16_cos(-hmc5843_heading),fix16_sin(-hmc5843_heading));
-        Drift_correction(fix16_cos(hmc5843_heading), fix16_sin(hmc5843_heading));
+        Drift_correction(fix16_cos(-hmc5843_heading), fix16_sin(-hmc5843_heading));
         Euler_angles();
 
 //                printf("%d,%d,%d,",bma180_acc_x,bma180_acc_y,bma180_acc_z);
