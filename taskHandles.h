@@ -3,6 +3,7 @@
 #define TASKHANDLES_H
 
 #include <stdint.h>
+#include "pid.h"
 
 typedef struct
 {
@@ -19,15 +20,15 @@ typedef struct
 //                //xSemaphoreHandle SPI;  // spi lock
 //        }lock;
 //
-//        struct {
-//                //PID_DATA * pid_roll;
-//                //PID_DATA * pid_pitch;
-//                //PID_DATA * pid_yaw;
+        struct {
+                PID_DATA * pid_roll;
+                PID_DATA * pid_pitch;
+                PID_DATA * pid_yaw;
 //                //uint8_t flying_mode; //X_MODE or PLUS_MODE
 //                //uint8_t led_mode;
 //                //uint16_t pitch_roll_tx_scale;
 //                //uint16_t yaw_tx_scale;
-//        }flight_settings;
+        }flight_settings;
 
         struct {
                 OS_MutexID i2c;
