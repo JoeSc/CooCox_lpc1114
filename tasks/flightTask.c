@@ -10,7 +10,7 @@
 
 #include "stdio.h"
 
-#define FLIGHT_RATE 20
+#define FLIGHT_RATE 20 // in milliseconds
 void flightTask( void *param)
 {
     TASKHANDLES *taskHandles = (TASKHANDLES*)param;
@@ -35,6 +35,7 @@ void flightTask( void *param)
     puts("I2C INITED\n");
 
 
+    uint64_t last_calc = CoGetOSTime();
     while(1)
     {
         CoTickDelay(OS_MS(FLIGHT_RATE));
@@ -48,7 +49,11 @@ void flightTask( void *param)
           calculate_heading_hmc5843(pitch, roll);
       
 //        G_Dt = 2621; for 40 ms
-        G_Dt = FLIGHT_RATE * 65;
+//        G_Dt = FLIGHT_RATE * 65;
+          printf("%8d %8d %8d\n",(uint32_t)CoGetOSTime(),(uint32_t)last_calc,(uint32_t)((CoGetOSTime()-last_calc)*(1000/CFG_SYSTICK_FREQ)));
+
+          G_Dt = ((CoGetOSTime()-last_calc)*(65000/CFG_SYSTICK_FREQ));
+          last_calc = CoGetOSTime();
         Matrix_update( itg3200_gyro_x, itg3200_gyro_y, itg3200_gyro_z-90, 
                 bma180_acc_x, bma180_acc_y, bma180_acc_z);
         Normalize();
@@ -61,7 +66,7 @@ void flightTask( void *param)
         printf("%8d, %8d, %8d, %8d\n",roll,pitch,yaw,hmc5843_heading);
 //        printf("%8d, %8d, %8d, %8d\n",hmc5843_mag_x,hmc5843_mag_y,hmc5843_mag_z,
  //               fix16_to_int(fix16_mul(fix16_atan2(-hmc5843_mag_y,hmc5843_mag_x),fix16_from_dbl(57.2957))));
-
+        printf("%d\n",(uint32_t)CoGetOSTime());
         GPIO_GPIO2DATA &= ~(1<<6);
         
 //        printf("%8d\%8d\t%8d\n",hmc5843_mag_x,hmc5843_mag_y,fix16_to_int(fix16_mul(fix16_from_dbl(57.2957795131),hmc5843_heading)));
