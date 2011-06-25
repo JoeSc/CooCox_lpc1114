@@ -33,7 +33,7 @@ int main(void)
     System.flight_control.armed=0;
     System.flight_control.error=0;    
     System.lock.i2c = CoCreateMutex ( );
-
+    
     CoInitOS();
 
     CoCreateTask( ledTask,
@@ -62,4 +62,9 @@ int main(void)
     while(1);
 }
 
+HardFault_Handler()
+{
+    puts("ER_HF");
+    while(1);
+}
 
